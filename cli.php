@@ -6,10 +6,16 @@
 function make_me_a_controller(array $args, string $file_content):void{
 	//remember the 1st argument is always the name
 	//lets receive a name for the controller file
-
 	if(isset($args[1])){
-		echo $args[1].PHP_EOL;
-		echo $file_content;
+		$file = fopen("./$args[1].php","w");
+		if($file){
+			fwrite($file,$args[1]);
+			fclose($file);
+			echo "file created";
+			echo $file_content;
+		}
+		else
+			echo "Opening file failed.";
 	}else
 		echo "Dude I need a name for the file";
 }
